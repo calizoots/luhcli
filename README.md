@@ -87,3 +87,34 @@ let mode_arg = Arg::new("mode")
     ]);
 ```
 
+### Retrieving arguements
+
+```rust
+fn handle_config_command(args: &ParsedArgs) -> LuhTwin<()> {
+    match args.get("action").map(|s| s.as_str()) {
+        Some("list") => {
+            // do something
+        }
+
+        _ => {
+            exit(3);
+        }
+    }
+    Ok(())
+}
+```
+
+```rust
+fn handle_app_command(args: &ParsedArgs) -> LuhTwin<()> {
+    match args.get("action").map(|s| s.as_str()) {
+        Some("start") => {
+            // do something
+        }
+
+        _ => {
+            exit(3);
+        }
+    }
+    Ok(())
+}
+```

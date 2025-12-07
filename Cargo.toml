@@ -1,0 +1,12 @@
+[package]
+name = "luhcli"
+version = "0.0.1"
+authors = ["cali zoots <calizoots@gmail.com>"]
+edition = "2021"
+description = "A simple and ergonomic CLI library for Rust."
+license-file = "LICENSE"
+repository = "https://github.com/calizoots/luhcli"
+
+[dependencies]
+luhlog = "0.1"
+luhtwin = "0.1.4"

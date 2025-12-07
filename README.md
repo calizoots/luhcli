@@ -27,7 +27,7 @@ luhcli = "0.1"
 
 Then, create a CLI app using `CliApp`, define commands and arguments, and run it:
 
-```ignore
+```rust
 use luhcli::{CliApp, Command, Arg};
 use luhtwin::LuhTwin;
 
@@ -53,7 +53,7 @@ fn main() -> LuhTwin<()> {
 
 ### Simple Flag
 
-```ignore
+```rust
 let verbose = Arg::new("verbose")
     .short('v')
     .long("verbose")
@@ -62,14 +62,14 @@ let verbose = Arg::new("verbose")
 
 ### Positional Argument
 
-```ignore
+```rust
 let filename = Arg::positional("filename", 0)
     .help("Input file path");
 ```
 
 ### Option with Default Value
 
-```ignore
+```rust
 let output = Arg::new("output")
     .takes_value()
     .long("output")
@@ -79,7 +79,7 @@ let output = Arg::new("output")
 
 ### Conditional Sub-Arguments
 
-```ignore
+```rust
 let mode_arg = Arg::new("mode")
     .takes_value()
     .when("advanced", vec![

@@ -89,6 +89,79 @@
 //!     ]);
 //! ```
 //!
+//! ### All together
+//!
+//! ```ignore
+//! fn handle_config_command(args: &ParsedArgs) -> LuhTwin<()> {
+//!     match args.get("action").map(|s| s.as_str()) {
+//!         Some("list") => {
+//!             // do something
+//!         }
+//! 
+//!         // more here
+//! 
+//!         _ => {
+//!             exit(3);
+//!         }
+//!     }
+//!     Ok(())
+//! }
+//! 
+//! fn handle_app_command(args: &ParsedArgs) -> LuhTwin<()> {
+//!     match args.get("action").map(|s| s.as_str()) {
+//!         Some("start") => {
+//!             // do something
+//!         }
+//! 
+//!         // more here
+//! 
+//!         _ => {
+//!             exit(3);
+//!         }
+//!     }
+//!     Ok(())
+//! }
+//! 
+//! fn main() -> LuhTwin<() {
+//!     let cli = App::new("moth")
+//!         .about("your favourite music player <3")
+//!         .subcommand(
+//!             Command::new("config")
+//!                 .about("edit the moth.json config (has all the general options)")
+//!                 .arg(
+//!                     Arg::positional("action", 0)
+//!                         .help("action to perform")
+//!                         .possible_values(["get", "set", "list"])
+//!                         .when("get", vec![
+//!                             Arg::positional("key", 0).help("key to retrieve")
+//!                         ])
+//!                         .when("set", vec![
+//!                             Arg::positional("key", 0).help("key to set"),
+//!                             Arg::positional("value", 1).help("value to set").required(false),
+//!                         ])
+//!                 )
+//!                 .handler(handle_config_command)
+//!         )
+//!         .subcommand(
+//!             Command::new("app")
+//!                 .about("start, stop, restart or list info about the app >.<")
+//!                 .arg(
+//!                     Arg::positional("action", 0)
+//!                         .help("action to perform")
+//!                         .possible_values(["start", "stop", "restart", "info"])
+//!                         .when("info", vec![
+//!                             Arg::new("noformat")
+//!                                 .short('n')
+//!                                 .long("noformat")
+//!                                 .help("No log formatting in info")
+//!                         ])
+//!                 )
+//!                 .handler(handle_app_command)
+//!         );
+//! 
+//!     cli.run()?;
+//! }
+//! ```
 
 #[cfg(test)]
 mod tests;
